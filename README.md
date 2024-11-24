@@ -2,9 +2,9 @@
 
 a color scheme modifier for the teenage engineering op-1 (original).
 
-![neo theme](assets/neo_theme.jpg)
+<img src="assets/neo_theme.jpg" width=300 />
 
-![neo theme](assets/neo_theme_2.jpg)
+<img src="assets/neo_theme_2.jpg" width=300 />
 
 *there's no way to take screenshots on the OP-1, sorry for the picture quality LOL*
 
