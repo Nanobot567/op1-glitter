@@ -77,7 +77,18 @@ for file in os.listdir(dirname_display):
                 if v != "": 
                     colors[k] = v
 
-        for orig, repl in colors.items():
+        colorsOrder = []
+
+        for k, v in colors.items():
+            if not re.search(HEX_COLOR_REGEX, k):
+                colorsOrder.insert(0, k)
+            else:
+                colorsOrder.append(k)
+
+        for cl in colorsOrder:
+            orig = cl
+            repl = colors[cl]
+
             if orig and repl:
                 if re.search(HEX_COLOR_REGEX, orig) and re.search(HEX_COLOR_REGEX, repl):            
                     verbose_print(f"key-value pair {orig}: {repl} are valid hex colors, replacing...")
@@ -95,16 +106,26 @@ for file in os.listdir(dirname_display):
                         repl = [repl]
 
                     for currentRepl in repl:
+                        isColors = (re.search(HEX_COLOR_REGEX, currentRepl[0]) and re.search(HEX_COLOR_REGEX, currentRepl[1]))
+
                         for element in tree.iter():
                             if element.get("id") == orig:
-                                if element.tag.split("}")[1] == "g":
-                                    verbose_print("key is an SVG group, replacing all colors in this group...")
+                                if isColors:
                                     for e in element.iter():
-                                        if e.get(currentRepl[0]):
-                                            e.set(currentRepl[0], currentRepl[1].upper())
+                                        if e.get("stroke") == currentRepl[0].upper():
+                                            e.set("stroke", currentRepl[1].upper())
+     
+                                        if e.get("fill") == currentRepl[0].upper():
+                                            e.set("fill", currentRepl[1].upper())
+                                else:
+                                    if element.tag.split("}")[1] == "g":
+                                        verbose_print("key is an SVG group, replacing all colors in this group...")
+                                        for e in element.iter():
+                                            if e.get(currentRepl[0]):
+                                                e.set(currentRepl[0], currentRepl[1].upper())
 
-                                if element.get(currentRepl[0]):
-                                    element.set(currentRepl[0], currentRepl[1].upper())
+                                    if element.get(currentRepl[0]):
+                                        element.set(currentRepl[0], currentRepl[1].upper())
 
                     dat = etree.tostring(tree).decode()
 

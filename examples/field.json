@@ -14,5 +14,14 @@
     "#00ed6d": "#cc9349",
     "#80ffaf": "#c98d3e",
     "#00acfa": "#1c7bce"
+  },
+  "ok": {
+    "cowbella": "#b88f5b",
+    "cowbella_1_": "#b88f5b",
+    "cowbellb": "#b88f5b",
+    "cowbellb_1_": "#b88f5b",
+    "druma": ["#ff3a5d", "#9ba8a8"],
+    "drumb": ["#ff3a5d", "#9ba8a8"],
+    "synth": ["#ff90a7", "#9ba8a8"]
   }
 }
