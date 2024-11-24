@@ -46,3 +46,4 @@ Some of the SVGs in `content/display/` are pretty self explanatory, although mos
 - 9256d7: purple background
 - 4d9eff: alternate, lighter blue
 - 383572: dull dark purple
+- d4d4d6: white, most dynamic elements use this color (tape, high EQ, changing text)

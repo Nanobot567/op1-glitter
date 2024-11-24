@@ -23,6 +23,7 @@ parser.add_argument("firmware", help="op-1 firmware file (op1_[num].op1)", type=
 parser.add_argument("-k", "--keep-unpacked", help="keep unpacked firmware folder", action="store_true")
 parser.add_argument("-o", "--output", help="output filename")
 parser.add_argument("-v", "--verbose", help="verbose mode", action="store_true")
+parser.add_argument("-m", "--mods", help="additional mods to apply to the firmware file through op1repacker. mod names should be separated by commas.")
 
 args = parser.parse_args()
 
@@ -52,10 +53,18 @@ except FileNotFoundError:
     print("error: op1repacker not found. please install it with pip: `pip install op1repacker`!")
     quit()
 
-print("patching SVGs...")
-
 dirname = os.path.splitext(args.firmware.split("/")[0])[0]
 dirname_display = dirname + "/content/display/"
+
+if args.mods:
+    for mod in args.mods.split(","):
+        if mod in ["iter", "presets-iter", "filter", "subtle-fx", "gfx-iter-lab", "gfx-tape-invert", "gfx-cwo-moose"]:
+            print(f"applying mod {mod}...")
+            subprocess.run(["op1repacker", "modify", dirname, "--options", mod], stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
+        else:
+            print(f"warning: mod {mod} is not an available op1repacker mod")
+
+print("patching SVGs...")
 
 for file in os.listdir(dirname_display):
     if file.endswith(".svg"):
@@ -90,10 +99,11 @@ for file in os.listdir(dirname_display):
             repl = colors[cl]
 
             if orig and repl:
-                if re.search(HEX_COLOR_REGEX, orig) and re.search(HEX_COLOR_REGEX, repl):            
+                if re.search(HEX_COLOR_REGEX, orig) and re.search(HEX_COLOR_REGEX, repl):
                     verbose_print(f"key-value pair {orig}: {repl} are valid hex colors, replacing...")
 
                     dat = dat.replace(orig.upper(), repl.upper())
+                    dat = dat.replace(orig.lower(), repl.lower()) # account for iter-lab mod
 
                     tree = etree.fromstring(dat.encode()) # inefficient but who cares lol
                 else:
