@@ -40,10 +40,9 @@ Some of the SVGs in `content/display/` are pretty self explanatory, although mos
 - 00ed95: green encoder
 - ff3a5d: red encoder
 - 698eff: blue encoder
-- dfd9ff: white encoder
+- dfd9ff: white encoder, most dynamic elements use this color (tape, high EQ, changing text)
 - ffffff: white
 - aeb1dc: "text" white
 - 9256d7: purple background
 - 4d9eff: alternate, lighter blue
 - 383572: dull dark purple
-- d4d4d6: white, most dynamic elements use this color (tape, high EQ, changing text)
