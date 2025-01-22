@@ -1,10 +1,26 @@
 # theme creation guide
 
-Valid op1-glitter themes must have at least a key "global" in the top-level object. Optionally, additional keys can be added which have the same name as a .svg in an unpacked OP-1 firmware's /content/display/ directory. Any keys not associated with a file in this directory will be ignored.
+Valid op1-glitter themes must have at least a key "global" in the top-level object. Optionally, additional keys can be added which have the same name as a .svg in an unpacked OP-1 firmware's `/content/display/` directory. 
 
 > to unpack a firmware, run `op1unpacker unpack (firmware)`.
 
-The values of these keys must be objects. The keys can either be a color in hex notation (ex. #1049e8, #ffffff), or the name of a SVG element's ID.
+Any keys not associated with a file in this directory will be ignored. Although it is not required, values for theme author, name, and description are good to have in a key named `theme_meta` :)
+
+For example:
+
+```json
+    {
+        "theme_meta": {
+            "name": "neo",
+            "description": "This is a very bright theme centered around the colors purple, cyan, and orange.",
+            "author": "nanobot567",
+        }
+        "global": {
+            ...
+        }
+```
+
+The values of the `global` key or filename keys must be objects. The keys within can either be a color in hex notation (ex. #1049e8, #ffffff), or the name of a SVG element's ID.
 
 If the key is a hex color, the value must be another color in hex notation. If the key is an SVG element ID, the value must be a table containing the attribute to modify (usually `stroke` or `fill`), then the hex color.
 
