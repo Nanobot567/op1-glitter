@@ -18,11 +18,56 @@ For example:
         "global": {
             ...
         }
+    ...
 ```
 
 The values of the `global` key or filename keys must be objects. The keys within can either be a color in hex notation (ex. #1049e8, #ffffff), or the name of a SVG element's ID.
 
-If the key is a hex color, the value must be another color in hex notation. If the key is an SVG element ID, the value must be a table containing the attribute to modify (usually `stroke` or `fill`), then the hex color.
+If the key is a hex color, the value must be another color in hex notation...
+
+```json
+{
+    ...
+    "presetbrowser": {
+        "#21005b": "#093654"
+    },
+    ...
+}
+```
+
+If the key is an SVG element ID, the value can either be a hex color...
+
+```json
+{
+    ...
+    "ok": {
+        "cowbella": "#b88f5b",
+    ...
+}
+```
+
+...or a table containing the attribute to modify (usually `stroke` or `fill`), then the hex color...
+
+```json
+{
+    ...
+    "ok": {
+        "druma": ["stroke", "#9ba8a8"]
+    ...
+}
+```
+
+...or a table containing an original hex color, then the new hex color to replace it with.
+
+```json
+{
+    ...
+    "ok": {
+        "synth": ["#ff90a7", "#9ba8a8"]
+    ...
+}
+```
+
 
 > check out the example themes in `examples/` if you're confused!
 
